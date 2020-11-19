@@ -84,7 +84,7 @@ Raises:
         print('Error logging off.  Investigate.)
 ```
 
-**get_nessus_key**(url, token)
+**nessus_get_key**(url, token)
 
 Keyword Arugments:
 * url \- A string.  The keys endpoint of the Nessus scanner.  Example: https://nessus_scanner.domain.tld:8834/session/keys
@@ -99,12 +99,12 @@ Raises:
 
 **Code Example:**
 ```python
-    from common.navm_lib import get_nessus_key
+    from common.navm_lib import nessus_get_key
     from requests import post
 
     key_url = 'https://nessus.domain.tld:8834/session/keys'
     # Getting an API key from a Nessus server.
-    api_key = get_nessus_key(key_url, token)
+    keys = nessus_get_key(key_url, token)
     # Logging out of session as we no longer need it.
     session_url = 'https://nessus.domain.tld:8834/session'
     session_log_off = nessus_session_logoff(session_url, token)
@@ -121,10 +121,8 @@ Raises:
     }
     scan_url = 'https://nessus.domain.tld:8834/scans'
     # Setting up api-key authentication.
-    headers = { 
-        'X-ApiKeys: ' +
-        'accessKey=' + api_key['access_key'] + ';' +
-        'secretKey=' + api_key['secret_key']
-    }
+    headers = {'X-ApiKeys:' 'accessKey=%s; secretKey=%s' % (
+        keys['access_key'], keys['secret_key']
+    )}
     scanner_response = post(scan_url, headers=headers, params=params)
 ```
