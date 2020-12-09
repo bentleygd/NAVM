@@ -126,3 +126,23 @@ Raises:
     )}
     scanner_response = post(scan_url, headers=headers, params=params)
 ```
+
+**nessus_get_scans**(url, token=None, keys=None, folder=None, last_mod=None)
+
+Keyword arguments:
+* url \- A string.  Required value.  The scans endpoint of the Nessus server. Example: https://scanner.domain.tld:8834/scans
+* token \- A string.  The session token returned by the nessus_session_login function.  This value is not required if using API keys.
+* keys \- A string.  The api keys returned by the nessus_get_key function.  This value is not required if using a session token.
+* folder \- An integer.  Optional value.  The folder ID of the scans to retrieve.
+* last_mod \- An integer.  Optional value.  The last modified date to use to limit the results to those that have only changed since this time.
+
+Returns:
+* scan_list \- A list of dictionaries.  The list of scans from the Nessus server.
+
+Raises:
+* HTTPError \- An exception occurs when the Nessus server returns a HTTP error.
+* Timeout \- An exception occurs when the Nessus server takes more than five seconds to respond.
+* AuthError \- An exception occurs when invalid credentials are provide to the function.
+
+**Code Example:***
+```python
