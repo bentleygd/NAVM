@@ -405,7 +405,7 @@ def nessus_html_report(url, scan_id, token=None, keys=None):
     Returns:
     scan_report - A temporary file-like object (as created by the
     TemporaryFile class).  This is the data downloaded from the Nessus
-    scanner.  Note: this file-like object is utf-8 encoded.
+    scanner.
 
     Rasies:
     HTTPError - An exception occurs when the Nessus server returns a
@@ -549,6 +549,10 @@ def nessus_stop_all_scans(url, scan_list, token=None, keys=None):
     token - A string.  A session token created by nessus_get_token.
     keys - A dictionary.  A dictionary of API keys created by
     nessus_get_keys.
+
+    Returns:
+    Stopped scans - A list of dictionaries. This is a ist of all the
+    scans that were stopped as a result of executing this function.
 
     Raises:
     AuthError - An exception occurs when invalid credentials are
